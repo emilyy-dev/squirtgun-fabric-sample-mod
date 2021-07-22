@@ -9,6 +9,7 @@ import me.lucyy.squirtgun.fabric.FabricNodeExecutor;
 import me.lucyy.squirtgun.fabric.FabricPlatform;
 import me.lucyy.squirtgun.format.FormatProvider;
 import me.lucyy.squirtgun.platform.audience.SquirtgunUser;
+import me.lucyy.squirtgun.platform.scheduler.Task;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -40,6 +41,12 @@ public class SquirtgunSampleMod implements DedicatedServerModInitializer {
   private void serverStarting(final MinecraftServer server) {
     this.server = server;
     this.squirtgunPlatform = new FabricPlatform(server);
+
+    this.squirtgunPlatform
+        .getTaskScheduler()
+        .start(Task.builder(platform -> platform.getConsole().sendMessage(text().append(text("Players online:"), space(),
+                                                                                        text(platform.getOnlinePlayers().size()))))
+                   .async().delay(20 * 60).interval(20 * 60).build());
   }
 
   private void serverStopping(final MinecraftServer server) {
