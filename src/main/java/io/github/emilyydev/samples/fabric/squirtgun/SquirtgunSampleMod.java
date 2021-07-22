@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import me.lucyy.squirtgun.command.argument.GreedyStringArgument;
 import me.lucyy.squirtgun.command.context.CommandContext;
+import me.lucyy.squirtgun.command.node.CommandNode;
 import me.lucyy.squirtgun.command.node.NodeBuilder;
 import me.lucyy.squirtgun.fabric.FabricNodeExecutor;
 import me.lucyy.squirtgun.fabric.FabricPlatform;
@@ -55,14 +56,14 @@ public class SquirtgunSampleMod implements DedicatedServerModInitializer {
   }
 
   private void commandRegistration(final CommandDispatcher<ServerCommandSource> dispatcher, final boolean dedicatedServer) {
-    final var node = new NodeBuilder<SquirtgunUser>()
+    final CommandNode<SquirtgunUser> node = new NodeBuilder<SquirtgunUser>()
         .name("squirtgun-sample-mod")
         .permission("ssm.command")
         .arguments(new GreedyStringArgument("rest", "Command arguments...", true))
         .executes(this::command)
         .build();
 
-    final var executor = new FabricNodeExecutor(node, new SimpleFormatProvider(), () -> this.squirtgunPlatform);
+    final FabricNodeExecutor executor = new FabricNodeExecutor(node, new SimpleFormatProvider(), () -> this.squirtgunPlatform);
     dispatcher.register(literal(node.getName())
                             .executes(executor)
                             .then(argument("rest", StringArgumentType.greedyString())
