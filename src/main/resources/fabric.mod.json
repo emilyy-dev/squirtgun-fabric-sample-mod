@@ -1,0 +1,23 @@
+{
+  "name": "Squirtgun-Fabric Sample Mod",
+  "id": "squirtgun-fabric-sample-mod",
+  "version": "${version}",
+  "schemaVersion": 1,
+  "contact": {
+    "sources": "https://github.com/emilyy-dev/squirtgun-fabric-sample-mod",
+    "issues": "https://github.com/emilyy-dev/squirtgun-fabric-sample-mod/issues"
+  },
+  "authors": [
+    {
+      "name": "emilyy-dev",
+      "contact": {
+        "sources": "https://github.com/emilyy-dev"
+      }
+    }
+  ],
+  "license": "Unlicense",
+  "environment": "server",
+  "depends": {
+    "squirtgun-platform-fabric": ">=2.0.0"
+  }
+}
