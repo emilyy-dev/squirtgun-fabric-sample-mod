@@ -25,3 +25,7 @@ dependencies {
 
     modImplementation(include("me.lucyy:squirtgun-platform-fabric:2.0.0-pre6-SNAPSHOT")!!)
 }
+
+tasks.processResources {
+    filesMatching("**/fabric.mod.json") { expand("version" to version) }
+}

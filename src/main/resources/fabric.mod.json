@@ -15,9 +15,14 @@
       }
     }
   ],
-  "license": "Unlicense",
   "environment": "server",
+  "entrypoints": {
+    "server": [
+      "io.github.emilyydev.samples.fabric.squirtgun.SquirtgunSampleMod"
+    ]
+  },
+  "license": "Unlicense",
   "depends": {
-    "squirtgun-platform-fabric": ">=2.0.0"
+    "squirtgun-platform-fabric": "*"
   }
 }
