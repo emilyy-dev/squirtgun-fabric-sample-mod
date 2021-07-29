@@ -10,10 +10,13 @@ val minecraftVersion: String = "1.17.1"
 val yarnMappings: String = "1.17.1+build.24"
 val loaderVersion: String = "0.11.6"
 val fabricVersion: String = "0.37.0+1.17"
+val adventureVersion: String = "4.1.0-SNAPSHOT"
+val squirtgunVersion: String = "2.0.0-pre6-SNAPSHOT"
 
 repositories {
     mavenCentral()
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
+    // you don't actually need local, it was added to use the local squirtgun-platform-fabric build (before it was published)
     mavenLocal()
 }
 
@@ -23,7 +26,10 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:$loaderVersion")
     modImplementation("net.fabricmc.fabric-api:fabric-api:$fabricVersion")
 
-    modImplementation(include("me.lucyy:squirtgun-platform-fabric:2.0.0-pre6-SNAPSHOT")!!)
+    // user must bundle their own adventure impl
+    // squirtgun cannot enforce one, see https://github.com/KyoriPowered/adventure-platform-fabric/blob/master/README.md#versions
+    modImplementation(include("net.kyori:adventure-platform-fabric:$adventureVersion")!!)
+    modImplementation(include("me.lucyy:squirtgun-platform-fabric:$squirtgunVersion")!!)
 }
 
 tasks.processResources {
